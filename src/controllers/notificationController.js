@@ -8,7 +8,7 @@ const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 // Validation schemas
 const notificationSchema = Joi.object({
   type: Joi.string().required(),
-  entityType: Joi.string().valid('task', 'alarm', 'visit', 'medicine').required(),
+  entityType: Joi.string().valid('task', 'alarm', 'visit', 'medicine', 'audio', 'photo').required(),
   entityId: Joi.string().required(),
   title: Joi.string().required(),
   message: Joi.string().required(),

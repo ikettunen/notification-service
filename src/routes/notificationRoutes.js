@@ -1,6 +1,5 @@
 const express = require('express');
 const notificationController = require('../controllers/notificationController');
-const { authenticateJWT } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -53,7 +52,7 @@ const router = express.Router();
  *       401:
  *         description: Unauthorized
  */
-router.post('/', authenticateJWT, notificationController.createNotification);
+router.post('/', notificationController.createNotification);
 
 /**
  * @swagger
@@ -90,7 +89,7 @@ router.post('/', authenticateJWT, notificationController.createNotification);
  *       201:
  *         description: Task notification created successfully
  */
-router.post('/task', authenticateJWT, notificationController.createTaskNotification);
+router.post('/task', notificationController.createTaskNotification);
 
 /**
  * @swagger
@@ -128,7 +127,7 @@ router.post('/task', authenticateJWT, notificationController.createTaskNotificat
  *       201:
  *         description: Alarm notification created successfully
  */
-router.post('/alarm', authenticateJWT, notificationController.createAlarmNotification);
+router.post('/alarm', notificationController.createAlarmNotification);
 
 /**
  * @swagger
@@ -167,7 +166,7 @@ router.post('/alarm', authenticateJWT, notificationController.createAlarmNotific
  *       201:
  *         description: Visit notification created successfully
  */
-router.post('/visit', authenticateJWT, notificationController.createVisitStatusNotification);
+router.post('/visit', notificationController.createVisitStatusNotification);
 
 /**
  * @swagger
@@ -210,7 +209,7 @@ router.post('/visit', authenticateJWT, notificationController.createVisitStatusN
  *       201:
  *         description: Medicine notification created successfully
  */
-router.post('/medicine', authenticateJWT, notificationController.createMedicineNotification);
+router.post('/medicine', notificationController.createMedicineNotification);
 
 // Get notifications for a recipient
 router.get('/recipient/:recipientId', notificationController.getNotifications);

@@ -55,11 +55,28 @@ const createNotification = async (notificationData) => {
     case 'medicine':
       topicType = 'MEDICINE';
       break;
+    case 'audio':
+      topicType = 'TASK'; // Route audio uploads to TASK topic
+      break;
+    case 'photo':
+      topicType = 'TASK'; // Route photo uploads to TASK topic
+      break;
     default:
       throw new Error(`Unknown entity type: ${entityType}`);
   }
 
   try {
+    // For local development, skip AWS services
+    if (process.env.NODE_ENV === 'development') {
+      logger.info('Local development mode - skipping AWS SNS/SQS');
+      return {
+        success: true,
+        notification,
+        sns: { success: true, messageId: 'local-dev-mock' },
+        sqs: { success: true, messageId: 'local-dev-mock' }
+      };
+    }
+    
     // Send to SNS for real-time notifications
     const snsResult = await publishToSNS(topicType, notification);
     
