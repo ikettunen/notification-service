@@ -33,6 +33,8 @@ const corsOptions = {
     
     const elasticIp = process.env.AWS_ELASTIC_IP;
     const allowedOrigins = [
+      // CloudFront URL
+      'https://d3t0yu0jekp29s.cloudfront.net',
       // AWS Elastic IP URLs
       process.env.FRONTEND_URL,
       process.env.DASHBOARD_URL,
